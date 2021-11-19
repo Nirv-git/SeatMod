@@ -9,7 +9,7 @@ using VRC.SDKBase;
 using VRC.Animation;
 using System.IO;
 
-[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0", "Nirvash")]
+[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.1", "Nirvash")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonColor(ConsoleColor.DarkBlue)]
 [assembly: MelonOptionalDependencies("ActionMenuApi")]
@@ -123,8 +123,8 @@ namespace SeatMod
 
         public static IEnumerator OnLoad()
         {
-            while (Utils.CurrentUser?.prop_String_3 == null)
-                yield return new WaitForSeconds(1f);
+            while (Utils.CurrentUser?._player?.field_Private_APIUser_0?.id == null)
+                yield return new WaitForSeconds(5f);
             privateKey = Utils.GetUserCode();
         }
 

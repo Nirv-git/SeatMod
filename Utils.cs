@@ -110,7 +110,9 @@ namespace SeatMod
  
         public static string GetUserCode()
         {//Say hi to a convoluted process of getting a number mostly unique to a user, but isn't exactly their ID
-            string value = Regex.Replace(GetMd5Hash(Utils.CurrentUser.prop_String_3), "[^0-9]", "");
+            var userString = Utils.CurrentUser?._player?.field_Private_APIUser_0?.id;
+            if (userString == "") return "ERROR-99999";
+            string value = Regex.Replace(GetMd5Hash(userString), "[^0-9]", "");
             return value.Substring(value.Length - 5, 5);
         }
 
