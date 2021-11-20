@@ -61,7 +61,7 @@ namespace SeatMod
                     if (Main.defaultHeadBone.Value)
                         HeadBone = arm?.transform?.root?.GetComponentInChildren<VRCPlayer>()?.field_Internal_Animator_0?.GetBoneTransform(HumanBodyBones.Head)?.gameObject;
 
-                    if (Main.lastLocation.Value && (!lastLocation?.Equals(null) ?? false))
+                    if (Main.lastLocation.Value && (!lastLocation?.Equals(null) ?? false) && lastLocation.transform.IsChildOf(arm.transform.root))
                         SitOnBoneMenu(lastLocation);
                     else if(!HeadBone?.Equals(null) ?? false)
                         SitOnBoneMenu(HeadBone);
