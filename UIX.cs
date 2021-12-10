@@ -33,7 +33,7 @@ namespace SeatMod
                     sitOnMenu.Hide();
                     GameObject arm = GameObject.Find(Utils.GetSelectedUser().gameObject.name + "/ForwardDirection/Avatar");
                     GameObject Head = arm?.transform?.root?.GetComponentInChildren<VRCPlayer>()?.field_Internal_Animator_0?.GetBoneTransform(HumanBodyBones.Head)?.gameObject;
-                    MelonCoroutines.Start(Main.HeadSit(Head));
+                    Main.activeCoroutine = MelonCoroutines.Start(Main.HeadSit(Head));
                     Main.Logger.Msg("Parented to Head - Press '9' to break out");
                     sitOnBoneConfirm.Hide();
                 });
@@ -117,7 +117,7 @@ namespace SeatMod
                     {
                         Main.boneToSit = selectedObject;
                         Main.useChair = true;
-                        MelonCoroutines.Start(Main.SitOnBone());
+                        Main.activeCoroutine = MelonCoroutines.Start(Main.SitOnBone());
                         Main.Logger.Msg("Sat on Bone - Press '9' to break out");
                         sitOnBoneConfirm.Hide();
                     }
@@ -184,7 +184,7 @@ namespace SeatMod
                     {
                         Main.boneToSit = selectedObject;
                         Main.useChair = false;
-                        MelonCoroutines.Start(Main.SitOnBone());
+                        Main.activeCoroutine = MelonCoroutines.Start(Main.SitOnBone());
                         Main.Logger.Msg("Parented to Bone - Press '9' to break out");
                     }
                     if (Main.rotate_Parent.Value != "None" && ( !Utils.LocalPlayerFBT() || !(Utils.IKTweaksAnimMode() == "All") || !Utils.IKTweaksEnabled() ) && 

@@ -9,7 +9,7 @@ using VRC.SDKBase;
 using VRC.Animation;
 using System.IO;
 
-[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.3", "Nirvash")]
+[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.4", "Nirvash")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonColor(ConsoleColor.DarkBlue)]
 [assembly: MelonOptionalDependencies("ActionMenuApi")]
@@ -23,6 +23,7 @@ namespace SeatMod
     {
         public static MelonLogger.Instance Logger;
 
+        public static object activeCoroutine;
         public static bool SitActive;
         public static bool useChair;
         public static GameObject boneToSit;
@@ -72,7 +73,7 @@ namespace SeatMod
 
         public override void OnApplicationStart()
         {
-            Logger = new MelonLogger.Instance("SeatMod");
+            Logger = new MelonLogger.Instance("SeatMod", ConsoleColor.DarkBlue);
             cat = MelonPreferences.CreateCategory(catagory, "SeatMod Settings");
 
             teleRate = MelonPreferences.CreateEntry(catagory, nameof(teleRate), 1f / 1000f, "TeleportRate");
@@ -167,20 +168,23 @@ namespace SeatMod
                 switch (SitType)
                 {
                     case 1:
-                        MelonCoroutines.Stop(HeadSit(null));
+                        try { MelonCoroutines.Stop(activeCoroutine); }
+                        catch (System.Exception ex) { Logger.Error("Failed to end Coroutine:\n" + ex.ToString()); }
                         Physics.gravity = Main.gravity;
                         SitActive = false;
                         Logger.Msg("Unsit - Parent Head");
                         break;
                     case 2:
-                        MelonCoroutines.Stop(SitOnBone());
+                        try { MelonCoroutines.Stop(activeCoroutine); }
+                        catch (System.Exception ex) { Logger.Error("Failed to end Coroutine:\n" + ex.ToString()); }
                         if (_baseObj != null) _baseObj.GetOrAddComponent<VRCSDK2.VRC_Station>().UseStation(Utils.LocalPlayerApi);
                         ToggleChair(false);
                         SitActive = false;
                         Logger.Msg("Unsit - Bone Chair");
                         break;
                     case 3:
-                        MelonCoroutines.Stop(SitOnBone());
+                        try { MelonCoroutines.Stop(activeCoroutine); }
+                        catch (System.Exception ex) { Logger.Error("Failed to end Coroutine:\n" + ex.ToString()); }
                         Physics.gravity = Main.gravity;
                         cameraTransform.localRotation = originalRotation;
                         SitActive = false;
