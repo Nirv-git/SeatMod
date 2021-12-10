@@ -26,7 +26,7 @@ namespace SeatMod
         {
             System.Drawing.Font fontOptional = Control.DefaultFont;
             try { fontOptional = new System.Drawing.Font("Arial", 60, System.Drawing.FontStyle.Bold); }
-            catch { fontOptional = new System.Drawing.Font(FontFamily.GenericSansSerif, 60, System.Drawing.FontStyle.Bold); MelonLogger.Msg("You dont have Arial!");  }
+            catch { fontOptional = new System.Drawing.Font(FontFamily.GenericSansSerif, 60, System.Drawing.FontStyle.Bold); Main.Logger.Msg("You dont have Arial!");  }
             System.Drawing.Color? textColorOptional = System.Drawing.Color.White;
             System.Drawing.Color? backColorOptional = System.Drawing.Color.Transparent;
 
@@ -65,7 +65,7 @@ namespace SeatMod
             }
             //Create a new image of the right size
             int max = Math.Max((int)textSize.Width, (int)textSize.Height); //Needs to be Square for the texture
-            //MelonLoader.MelonLogger.Msg($"W:{textSize.Width} H:{textSize.Height}");
+            //Main.Logger.Msg($"W:{textSize.Width} H:{textSize.Height}");
             //max = 472;
             //Image retImg = new Bitmap((int)textSize.Width, (int)textSize.Height);
             if (!usingBaseImage) retImg = new Bitmap(max, max);

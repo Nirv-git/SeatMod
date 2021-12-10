@@ -32,40 +32,40 @@ namespace SeatMod
 
             if (assetBundleIcons != null)
             {
-                try { arrowDown = LoadTexture("arrow-Down.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { arrowUp = LoadTexture("arrow-Up.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { arrowLeft = LoadTexture("arrow-Left.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { arrowRight = LoadTexture("arrow-Right.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { dualDown = LoadTexture("dual-Down.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { dualUp = LoadTexture("dual-Up.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { rotateLeft = LoadTexture("rotate-Left.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { rotateRight = LoadTexture("rotate-Right.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { mag = LoadTexture("mag.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { gears = LoadTexture("gears.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { arrowForwards = LoadTexture("arrow-forward.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { arrowBackwards = LoadTexture("arrow-backwards.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { gears = LoadTexture("gears.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { arrowsMenu = LoadTexture("arrow-Menu.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { chairLeave = LoadTexture("chairLeave"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { chair = LoadTexture("chair.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { checkMark = LoadTexture("checkMark.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { reset = LoadTexture("reset.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { animLay = LoadTexture("anim-Lay.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { animSitCrossed = LoadTexture("amin-SitCrossed.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { animSitIdle = LoadTexture("anim-SitIdle.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { animBasicSit = LoadTexture("BasicSit.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { cordXYZ = LoadTexture("cord-XYZ.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { cordY = LoadTexture("cord-Y.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { cordNone = LoadTexture("cord-None.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { x = LoadTexture("x.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { noFalling = LoadTexture("noFalling.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { savePosition = LoadTexture("savePosition.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { saveRotation = LoadTexture("saveRotation.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { save = LoadTexture("save.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
-                try { load = LoadTexture("load.png"); } catch { MelonLogger.Error("Failed to load image from asset bundle"); }
+                try { arrowDown = LoadTexture("arrow-Down.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { arrowUp = LoadTexture("arrow-Up.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { arrowLeft = LoadTexture("arrow-Left.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { arrowRight = LoadTexture("arrow-Right.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { dualDown = LoadTexture("dual-Down.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { dualUp = LoadTexture("dual-Up.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { rotateLeft = LoadTexture("rotate-Left.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { rotateRight = LoadTexture("rotate-Right.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { mag = LoadTexture("mag.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { gears = LoadTexture("gears.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { arrowForwards = LoadTexture("arrow-forward.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { arrowBackwards = LoadTexture("arrow-backwards.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { gears = LoadTexture("gears.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { arrowsMenu = LoadTexture("arrow-Menu.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { chairLeave = LoadTexture("chairLeave"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { chair = LoadTexture("chair.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { checkMark = LoadTexture("checkMark.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { reset = LoadTexture("reset.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { animLay = LoadTexture("anim-Lay.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { animSitCrossed = LoadTexture("amin-SitCrossed.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { animSitIdle = LoadTexture("anim-SitIdle.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { animBasicSit = LoadTexture("BasicSit.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { cordXYZ = LoadTexture("cord-XYZ.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { cordY = LoadTexture("cord-Y.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { cordNone = LoadTexture("cord-None.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { x = LoadTexture("x.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { noFalling = LoadTexture("noFalling.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { savePosition = LoadTexture("savePosition.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { saveRotation = LoadTexture("saveRotation.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { save = LoadTexture("save.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
+                try { load = LoadTexture("load.png"); } catch { Main.Logger.Error("Failed to load image from asset bundle"); }
 
             }
-            else MelonLogger.Error("Bundle was null");
+            else Main.Logger.Error("Bundle was null");
         }
 
         private static Texture2D LoadTexture(string Texture)
@@ -266,7 +266,7 @@ namespace SeatMod
                         case "Adjust": return cordNone;
                         case "Yaw-Rot": return cordY;
                         case "RollPitchYaw": return cordXYZ;
-                        default: MelonLoader.MelonLogger.Msg("Something Broke - RotationIcon Switch"); return rotateLeft;
+                        default: Main.Logger.Msg("Something Broke - RotationIcon Switch"); return rotateLeft;
                     }
                 }
                 CustomSubMenu.AddButton($"\nChair Rotation:\n{(RotationChairText())}", () =>
@@ -296,7 +296,7 @@ namespace SeatMod
                         case "SitCrossed": return animSitCrossed;
                         case "Laydown": return animLay;
                         case "BasicSit": return animBasicSit;
-                        default: MelonLoader.MelonLogger.Msg("Something Broke - AnimIcon Switch"); return rotateLeft;
+                        default: Main.Logger.Msg("Something Broke - AnimIcon Switch"); return rotateLeft;
                     }
                 }
                 CustomSubMenu.AddButton($"\n\nChair Anim:\n{(AnimText())}", () =>
@@ -331,7 +331,7 @@ namespace SeatMod
                         case "Adjust": return cordNone;
                         case "RotateY": return cordY;
                         case "RotateAll": return cordXYZ;
-                        default: MelonLoader.MelonLogger.Msg("Something Broke - RotationParentIcon Switch"); return rotateLeft;
+                        default: Main.Logger.Msg("Something Broke - RotationParentIcon Switch"); return rotateLeft;
                     }
                 }
                 CustomSubMenu.AddButton($"\nParent Rotation:\n{(RotationParentText())}", () =>
@@ -354,7 +354,7 @@ namespace SeatMod
                 case 4: return ref s4;
                 case 5: return ref s5;
                 case 6: return ref s6;
-                default: MelonLoader.MelonLogger.Msg("Something Broke - StoredIcon Switch"); return ref x;
+                default: Main.Logger.Msg("Something Broke - StoredIcon Switch"); return ref x;
             }
         }
 

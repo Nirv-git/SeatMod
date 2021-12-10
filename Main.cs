@@ -9,7 +9,7 @@ using VRC.SDKBase;
 using VRC.Animation;
 using System.IO;
 
-[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.2", "Nirvash")]
+[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.3", "Nirvash")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonColor(ConsoleColor.DarkBlue)]
 [assembly: MelonOptionalDependencies("ActionMenuApi")]
@@ -21,6 +21,8 @@ namespace SeatMod
 {
     public class Main : MelonMod
     {
+        public static MelonLogger.Instance Logger;
+
         public static bool SitActive;
         public static bool useChair;
         public static GameObject boneToSit;
@@ -70,7 +72,7 @@ namespace SeatMod
 
         public override void OnApplicationStart()
         {
-
+            Logger = new MelonLogger.Instance("SeatMod");
             cat = MelonPreferences.CreateCategory(catagory, "SeatMod Settings");
 
             teleRate = MelonPreferences.CreateEntry(catagory, nameof(teleRate), 1f / 1000f, "TeleportRate");
@@ -117,7 +119,7 @@ namespace SeatMod
             {
                 CustomActionMenu.InitUi();
             }
-            else MelonLogger.Msg("ActionMenuApi is missing, or setting is toggled off in Mod Settings - Not adding controls to ActionMenu");
+            else Logger.Msg("ActionMenuApi is missing, or setting is toggled off in Mod Settings - Not adding controls to ActionMenu");
             MelonCoroutines.Start(OnLoad());
         }
 
@@ -168,28 +170,28 @@ namespace SeatMod
                         MelonCoroutines.Stop(HeadSit(null));
                         Physics.gravity = Main.gravity;
                         SitActive = false;
-                        MelonLogger.Msg("Unsit - Parent Head");
+                        Logger.Msg("Unsit - Parent Head");
                         break;
                     case 2:
                         MelonCoroutines.Stop(SitOnBone());
                         if (_baseObj != null) _baseObj.GetOrAddComponent<VRCSDK2.VRC_Station>().UseStation(Utils.LocalPlayerApi);
                         ToggleChair(false);
                         SitActive = false;
-                        MelonLogger.Msg("Unsit - Bone Chair");
+                        Logger.Msg("Unsit - Bone Chair");
                         break;
                     case 3:
                         MelonCoroutines.Stop(SitOnBone());
                         Physics.gravity = Main.gravity;
                         cameraTransform.localRotation = originalRotation;
                         SitActive = false;
-                       MelonLogger.Msg("Unsit - Bone Solo");
+                       Logger.Msg("Unsit - Bone Solo");
                         break;
                     default:
-                        MelonLogger.Error("Something broke - Unsit, SitType - Switch");
+                        Logger.Error("Something broke - Unsit, SitType - Switch");
                         break;
                 }
             }
-            else MelonLogger.Msg("SitActive not true, doing nothing");
+            else Logger.Msg("SitActive not true, doing nothing");
         }
 
         public static IEnumerator SitOnBone()
@@ -218,10 +220,10 @@ namespace SeatMod
                             case "RollPitchYaw": //All rotation with Adjustments
                                 _baseObj.transform.rotation = boneToSit.transform.rotation * Quaternion.AngleAxis(rotate_Forward.Value, Vector3.left) * Quaternion.AngleAxis(rotate_Side.Value, Vector3.forward) * Quaternion.AngleAxis(rotate_Around.Value, Vector3.up);
                                 break;
-                            default: MelonLogger.Error("Something Broke - rotate_Chair_en Switch"); SitActive = false; break;
+                            default: Logger.Error("Something Broke - rotate_Chair_en Switch"); SitActive = false; break;
                         }
                     }
-                    catch (System.Exception ex) { MelonLogger.Error("Error in loop, calling unsit method:\n" + ex.ToString()); Unsit(); }
+                    catch (System.Exception ex) { Logger.Error("Error in loop, calling unsit method:\n" + ex.ToString()); Unsit(); }
                     if (teleRate.Value > .0011) yield return new WaitForSeconds(teleRate.Value);
                     else yield return null;
                 }
@@ -251,12 +253,12 @@ namespace SeatMod
                             //case "RotateAll": //All rotation with Adjustments
                             //    cameraTransform.rotation = boneToSit.transform.rotation * Quaternion.AngleAxis(rotate_Forward.Value, Vector3.left) * Quaternion.AngleAxis(rotate_Side.Value, Vector3.forward) * Quaternion.AngleAxis(rotate_Around.Value, Vector3.up);
                             //    break;
-                            default: MelonLogger.Error("Something Broke - rotate_Parent.Value Switch"); SitActive = false; break;
+                            default: Logger.Error("Something Broke - rotate_Parent.Value Switch"); SitActive = false; break;
                         }
                         if (noFallingAnim.Value)
                             playerMotion?.Reset();
                     }
-                    catch (System.Exception ex) { MelonLogger.Error("Error in loop, calling unsit method:\n" + ex.ToString()); Unsit(); }
+                    catch (System.Exception ex) { Logger.Error("Error in loop, calling unsit method:\n" + ex.ToString()); Unsit(); }
                     if (teleRate.Value > .0011) yield return new WaitForSeconds(teleRate.Value);
                     else yield return null;
                 }
@@ -274,7 +276,7 @@ namespace SeatMod
             {
                 VRC.Player selctedAvatar = Utils.GetSelectedUser();
                 sitTrans = GameObject.Find(selctedAvatar.gameObject.name + "/AnimationController/HeadAndHandIK/HeadEffector");
-                MelonLogger.Msg(ConsoleColor.Yellow, "Using IK HeadEffector");
+                Logger.Msg(ConsoleColor.Yellow, "Using IK HeadEffector");
             }
 
             SitActive = true;
@@ -287,7 +289,7 @@ namespace SeatMod
                     if (noFallingAnim.Value)
                         playerMotion?.Reset(); //Thanks to RequiDev/ReModCE
                 }
-                catch (System.Exception ex) { MelonLogger.Error("Error in loop, calling unsit method:\n" + ex.ToString()); Unsit(); }
+                catch (System.Exception ex) { Logger.Error("Error in loop, calling unsit method:\n" + ex.ToString()); Unsit(); }
                 if(teleRate.Value > .0011) yield return new WaitForSeconds(teleRate.Value);
                 else yield return null;
             }
@@ -329,18 +331,18 @@ namespace SeatMod
                 case "SitCrossed": return SitCrossed; 
                 case "Laydown": return Laydown;
                 case "BasicSit": return BasicSit;
-                default: MelonLogger.Error("Something Broke - GetChairAnim Switch"); return null;
+                default: Logger.Error("Something Broke - GetChairAnim Switch"); return null;
             }
         }
 
         public void UpdateChairAnim()
         {if (SitType == 2 && _baseObj != null)
             {
-                MelonLogger.Msg("Resetting Sit for Animation");
+                Logger.Msg("Resetting Sit for Animation");
                 Unsit();
                 MelonCoroutines.Start(Main.SitOnBone());
             }
-            //else MelonLoader.MelonLogger.Msg("_baseObj is null");
+            //else MelonLoader.Logger.Msg("_baseObj is null");
         }
 
         public static AssetBundle assetBundle;
@@ -372,7 +374,7 @@ namespace SeatMod
                 BasicSit = assetBundle.LoadAsset_Internal("BasicSit", Il2CppType.Of<AnimatorOverrideController>()).Cast<AnimatorOverrideController>();
                 BasicSit.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             }
-            else MelonLogger.Error("Bundle was null");
+            else Logger.Error("Bundle was null");
         }
     }
 }

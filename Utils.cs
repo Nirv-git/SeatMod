@@ -19,7 +19,7 @@ namespace SeatMod
             //return QuickMenu.prop_QuickMenu_0.field_Private_Player_0;
             var iuser = GameObject.Find("/UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>().field_Private_IUser_0;
             var userID = iuser.prop_String_0;
-            foreach (Player player in PlayerManager.Method_Public_Static_ArrayOf_Player_0())
+            foreach (Player player in PlayerManager.prop_PlayerManager_0.field_Private_List_1_Player_0)
             {
                 if (!player) continue;
                 if (player.prop_APIUser_0.id.Equals(userID)) return player;
@@ -39,8 +39,8 @@ namespace SeatMod
             string bio = player.prop_APIUser_0.bio.ToLower();
             string status = player.prop_APIUser_0.statusDescription.ToLower();
             string statusType = player.prop_APIUser_0.status;
-            //MelonLoader.MelonLogger.Msg(bio);
-            //MelonLoader.MelonLogger.Msg(status);
+            //Main.Logger.Msg(bio);
+            //Main.Logger.Msg(status);
             if(statusType == "busy" || status.Contains("nosit"))
                 return 3;
 
@@ -63,7 +63,7 @@ namespace SeatMod
                 stringChars[i] = chars[random.Next(chars.Length)];
             }
             string temp = new String(stringChars);
-            MelonLoader.MelonLogger.Msg("RandomString" + temp);
+            Main.Logger.Msg("RandomString" + temp);
             return temp;
         }
 
@@ -78,7 +78,7 @@ namespace SeatMod
               //All - "Ignore all (always slide around)
                 return MelonPreferences.GetEntryValue<string>("IkTweaks", "IgnoreAnimationsMode");
             }
-            //else MelonLogger.Msg("IKTweaks is missing");
+            //else Main.Logger.Msg("IKTweaks is missing");
             return "N/A";
         }
 
@@ -154,9 +154,9 @@ namespace SeatMod
                 if (Main._vpalocal == null)
                 {
                     Main._vpalocal = VRCPlayerApi.GetPlayerByGameObject(VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject);
-                    //MelonLoader.MelonLogger.Msg("vpalocal if: " + Main._vpalocal);//
+                    //Main.Logger.Msg("vpalocal if: " + Main._vpalocal);//
                 }
-                //MelonLoader.MelonLogger.Msg("vpalocal return: " + Main._vpalocal);//
+                //Main.Logger.Msg("vpalocal return: " + Main._vpalocal);//
                 return Main._vpalocal;
             }
         }
@@ -180,7 +180,7 @@ namespace SeatMod
                 case "SitIdle": Main.SittingAnim.Value = "SitCrossed"; break;
                 case "SitCrossed": Main.SittingAnim.Value = "Laydown"; break;
                 case "Laydown": Main.SittingAnim.Value = "BasicSit"; break;
-                default: Main.SittingAnim.Value = "SitCrossed"; MelonLoader.MelonLogger.Msg("Something Broke - Utils.RotateAnim - Switch"); break;
+                default: Main.SittingAnim.Value = "SitCrossed"; Main.Logger.Msg("Something Broke - Utils.RotateAnim - Switch"); break;
             }
         }
 
@@ -191,7 +191,7 @@ namespace SeatMod
                 case "Adjust": Main.rotate_Chair_en.Value = "Yaw-Rot"; break;
                 case "Yaw-Rot": Main.rotate_Chair_en.Value = "RollPitchYaw"; break;
                 case "RollPitchYaw": Main.rotate_Chair_en.Value = "Adjust"; break;
-                default: Main.rotate_Chair_en.Value = "Yaw-Rot"; MelonLoader.MelonLogger.Msg("Something Broke - Utils.RotateChairRotation - Switch"); break;
+                default: Main.rotate_Chair_en.Value = "Yaw-Rot"; Main.Logger.Msg("Something Broke - Utils.RotateChairRotation - Switch"); break;
             }
         }
 
@@ -203,7 +203,7 @@ namespace SeatMod
                 case "Adjust": Main.rotate_Parent.Value = "RotateY"; break;
                 case "RotateY": Main.rotate_Parent.Value = "None"; break;
                 //case "RotateAll": Main.rotate_Parent.Value = "None"; break;
-                default: Main.rotate_Parent.Value = "RotateY"; MelonLoader.MelonLogger.Msg("Something Broke - Utils.RotateParentRotate - Switch"); break;
+                default: Main.rotate_Parent.Value = "RotateY"; Main.Logger.Msg("Something Broke - Utils.RotateParentRotate - Switch"); break;
             }
         }
 

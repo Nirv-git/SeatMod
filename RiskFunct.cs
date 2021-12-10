@@ -33,7 +33,7 @@ namespace SeatMod
                 case 4: return "GameObject Blacklisted";
                 case 10: return "Not checked yet - Error?";
                 case 11: return "Private Instance: Mod Allowed";
-                default: MelonLoader.MelonLogger.Error($"Something Broke - Main.WorldType Switch - {Main.WorldType}"); return "Error";
+                default: Main.Logger.Error($"Something Broke - Main.WorldType Switch - {Main.WorldType}"); return "Error";
             }
         }
 
@@ -41,7 +41,7 @@ namespace SeatMod
         {
             if (alreadyCheckingWorld)
             {
-                MelonLogger.Error("Attempted to check for world multiple times");
+                Main.Logger.Error("Attempted to check for world multiple times");
                 yield break;
             }
 
@@ -53,14 +53,14 @@ namespace SeatMod
                 yield return new WaitForSecondsRealtime(1);
             }
             var worldId = currentWorld.id;
-            //MelonLogger.Msg($"Checking World with Id {worldId}");
+            //Main.Logger.Msg($"Checking World with Id {worldId}");
 
             // Check if instance is private
             if (RoomManager.field_Internal_Static_ApiWorldInstance_0?.type == InstanceAccessType.InvitePlus ||
                 RoomManager.field_Internal_Static_ApiWorldInstance_0?.type == InstanceAccessType.InviteOnly ||
                 RoomManager.field_Internal_Static_ApiWorldInstance_0?.type == InstanceAccessType.FriendsOnly)
             {
-                //MelonLogger.Msg($"Instance is private: '{RoomManager.field_Internal_Static_ApiWorldInstance_0?.type}'");
+                //Main.Logger.Msg($"Instance is private: '{RoomManager.field_Internal_Static_ApiWorldInstance_0?.type}'");
                 Main.WorldType = 11;
                 //Do not cache result
                 yield break;
@@ -70,7 +70,7 @@ namespace SeatMod
             if (checkedWorlds.TryGetValue(worldId, out int outres))
             {
                 Main.WorldType = outres;
-                //MelonLogger.Msg($"Using cached check {Main.WorldType} for world '{worldId}'");
+                //Main.Logger.Msg($"Using cached check {Main.WorldType} for world '{worldId}'");
                 yield break;
             }
 
@@ -105,14 +105,14 @@ namespace SeatMod
                         Main.WorldType = 0;
                         checkedWorlds.Add(worldId, 0);
                         alreadyCheckingWorld = false;
-                        //MelonLogger.Msg($"EmmVRC allows world '{worldId}'");
+                        //Main.Logger.Msg($"EmmVRC allows world '{worldId}'");
                         yield break;
 
                     case "denied":
                         Main.WorldType = 3;
                         checkedWorlds.Add(worldId, 3);
                         alreadyCheckingWorld = false;
-                        //MelonLogger.Msg($"EmmVRC denies world '{worldId}'");
+                        //Main.Logger.Msg($"EmmVRC denies world '{worldId}'");
                         yield break;
                 }
             }
@@ -133,7 +133,7 @@ namespace SeatMod
                                 if (worldTag.IndexOf("game", StringComparison.OrdinalIgnoreCase) != -1 && worldTag.IndexOf("games", StringComparison.OrdinalIgnoreCase) == -1)
                                 {
                                     tagResult = 2;
-                                    //MelonLogger.Msg($"Found game tag in world world '{worldId}'");
+                                    //Main.Logger.Msg($"Found game tag in world world '{worldId}'");
                                     break;
                                 }
                                 else if (worldTag.IndexOf("club", StringComparison.OrdinalIgnoreCase) != -1)
@@ -142,11 +142,11 @@ namespace SeatMod
                             Main.WorldType = tagResult;
                             checkedWorlds.Add(worldId, tagResult);
                             alreadyCheckingWorld = false;
-                            //MelonLogger.Msg($"Tag search result: '{tagResult}' for '{worldId}'");
+                            //Main.Logger.Msg($"Tag search result: '{tagResult}' for '{worldId}'");
                         }
                         else
                         {
-                            MelonLogger.Error("Failed to cast ApiModel to ApiWorld");
+                            Main.Logger.Error("Failed to cast ApiModel to ApiWorld");
                         }
                     }),
                 disableCache: false);

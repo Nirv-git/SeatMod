@@ -34,7 +34,7 @@ namespace SeatMod
                     GameObject arm = GameObject.Find(Utils.GetSelectedUser().gameObject.name + "/ForwardDirection/Avatar");
                     GameObject Head = arm?.transform?.root?.GetComponentInChildren<VRCPlayer>()?.field_Internal_Animator_0?.GetBoneTransform(HumanBodyBones.Head)?.gameObject;
                     MelonCoroutines.Start(Main.HeadSit(Head));
-                    MelonLoader.MelonLogger.Msg("Parented to Head - Press '9' to break out");
+                    Main.Logger.Msg("Parented to Head - Press '9' to break out");
                     sitOnBoneConfirm.Hide();
                 });
                 sitOnBoneConfirm.AddSimpleButton($"No - Back", () =>
@@ -69,7 +69,7 @@ namespace SeatMod
                         SitOnBoneMenu(arm);
                 }
                 else
-                    MelonLogger.Msg(ConsoleColor.Yellow, "Can not find avatar '/ForwardDirection/Avatar'");
+                    Main.Logger.Msg(ConsoleColor.Yellow, "Can not find avatar '/ForwardDirection/Avatar'");
             }));
             sitOnMenu.AddSimpleButton("Options", () =>
             {
@@ -118,7 +118,7 @@ namespace SeatMod
                         Main.boneToSit = selectedObject;
                         Main.useChair = true;
                         MelonCoroutines.Start(Main.SitOnBone());
-                        MelonLoader.MelonLogger.Msg("Sat on Bone - Press '9' to break out");
+                        Main.Logger.Msg("Sat on Bone - Press '9' to break out");
                         sitOnBoneConfirm.Hide();
                     }
 
@@ -185,7 +185,7 @@ namespace SeatMod
                         Main.boneToSit = selectedObject;
                         Main.useChair = false;
                         MelonCoroutines.Start(Main.SitOnBone());
-                        MelonLoader.MelonLogger.Msg("Parented to Bone - Press '9' to break out");
+                        Main.Logger.Msg("Parented to Bone - Press '9' to break out");
                     }
                     if (Main.rotate_Parent.Value != "None" && ( !Utils.LocalPlayerFBT() || !(Utils.IKTweaksAnimMode() == "All") || !Utils.IKTweaksEnabled() ) && 
                     (Main.rotate_Around.Value != 0 || Main.rotate_Side.Value != 0 || Main.rotate_Forward.Value != 0))
@@ -275,7 +275,7 @@ namespace SeatMod
                                 });
                             }
                         }
-                        catch (Exception ex) { MelonLogger.Msg(ConsoleColor.Red, "" + ex.ToString()); }
+                        catch (Exception ex) { Main.Logger.Msg(ConsoleColor.Red, "" + ex.ToString()); }
                     }
                 }
                 else shortcutsMenu.AddLabel($"Avatar not Humanoid");
@@ -286,7 +286,7 @@ namespace SeatMod
             sitOnBoneMenu.AddSimpleButton("Close/Back", () => { sitOnBoneMenu.Hide(); SitOnMenu(); });
 
             sitOnBoneMenu.AddLabel($"--Children GameObjects--");
-            //MelonLoader.MelonLogger.Msg(selectedObject.name);
+            //MelonLoader.Logger.Msg(selectedObject.name);
             if (selectedObject?.transform?.parent?.gameObject != null && selectedObject?.transform?.parent?.name != "ForwardDirection") sitOnBoneMenu.AddSimpleButton($" <--Back", () => SitOnBoneMenu(selectedObject.transform.parent.gameObject));
                 else sitOnBoneMenu.AddSimpleButton($" <--Back", () => { });
             if (selectedObject != null)
