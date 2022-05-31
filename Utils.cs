@@ -76,28 +76,27 @@ namespace SeatMod
               //Hands - "Ignore hands animations"
               //HandAndHead - "Ignore head and hands"
               //All - "Ignore all (always slide around)
-                return MelonPreferences.GetEntryValue<string>("IkTweaks", "IgnoreAnimationsMode");
+                return IKT.IKTweaksAnimMode();
             }
             //else Main.Logger.Msg("IKTweaks is missing");
             return "N/A";
+        }
+        public static void SetIKTweaksDisableAnim()
+        {
+            if (MelonHandler.Mods.Any(m => m.Info.Name == "IKTweaks"))
+            {
+                IKT.SetIKTweaksDisableAnim();
+            }
         }
 
         public static bool IKTweaksEnabled()
         {
             if (MelonHandler.Mods.Any(m => m.Info.Name == "IKTweaks"))
-            { 
-                return MelonPreferences.GetEntryValue<bool>("IkTweaks", "FullBodyVrIk");
+            {
+                return true; //Since IKTv2, no longer needs to be enabled to override animations
+                //return MelonPreferences.GetEntryValue<bool>("IkTweaks", "FullBodyVrIk");
             }
             return false;
-        }
-
-        public static void SetIKTweaksDisableAnim()
-        {
-            if (MelonHandler.Mods.Any(m => m.Info.Name == "IKTweaks"))
-            {
-                MelonPreferences.SetEntryValue<string>("IkTweaks", "IgnoreAnimationsMode", "All");
-                MelonPreferences.Save();
-            }
         }
 
         public static bool LocalPlayerFBT()

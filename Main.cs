@@ -9,10 +9,10 @@ using VRC.SDKBase;
 using VRC.Animation;
 using System.IO;
 
-[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.4", "Nirvash")]
+[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.5", "Nirvash")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonColor(ConsoleColor.DarkBlue)]
-[assembly: MelonOptionalDependencies("ActionMenuApi")]
+[assembly: MelonOptionalDependencies("ActionMenuApi","IKTweaks")]
 
 //If anyone acutally reads this code, I am sorry, it is based on several months of me poking at this on and off and I forget why things are setup the way they are
 //Okay, most has been cleaned up and is now readable
@@ -82,12 +82,12 @@ namespace SeatMod
             SittingAnim = MelonPreferences.CreateEntry(catagory, nameof(SittingAnim), "SitCrossed", "Chair sitting animation");
             ExpansionKitApi.RegisterSettingAsStringEnum(catagory, nameof(SittingAnim), new[] { ("BasicSit", "BasicSit"), ("SitIdle", "SitIdle"), ("SitCrossed", "SitCrossed"), ("Laydown", "Laydown") });
 
-            amapi_en = MelonPreferences.CreateEntry(catagory, nameof(amapi_en), true, "Use Action Menu API (Restert Required)");
+            amapi_en = MelonPreferences.CreateEntry(catagory, nameof(amapi_en), true, "Use Action Menu API (Restart Required)");
             rotate_Parent = MelonPreferences.CreateEntry(catagory, nameof(rotate_Parent), "RotateY", "Parent Rotation");
             ExpansionKitApi.RegisterSettingAsStringEnum(catagory, nameof(rotate_Parent), new[] { ("None", "None"), ("Adjust", "Adjustments Only"), ("RotateY", "Yaw Rotation") }); //, ("RotateAll", "RotateAll") });
             noFallingAnim = MelonPreferences.CreateEntry(catagory, nameof(noFallingAnim), true, "No Failling Animations");
 
-            amapi_ModsFolder = MelonPreferences.CreateEntry(catagory, nameof(amapi_ModsFolder), false, "Place Action Menu in 'Mods' Sub Menu (Restert Required)");
+            amapi_ModsFolder = MelonPreferences.CreateEntry(catagory, nameof(amapi_ModsFolder), false, "Place Action Menu in 'Mods' Sub Menu (Restart Required)");
             positionValue = MelonPreferences.CreateEntry(catagory, nameof(positionValue), .2f, "Position Adj value");
             highPrecisionPositionValue = MelonPreferences.CreateEntry(catagory, nameof(highPrecisionPositionValue), .05f, "Position Adj value (High precision)");
             //spacer1 = MelonPreferences.CreateEntry(catagory, nameof(spacer1), false, "-Does nothing-");
@@ -179,6 +179,7 @@ namespace SeatMod
                         catch (System.Exception ex) { Logger.Error("Failed to end Coroutine:\n" + ex.ToString()); }
                         if (_baseObj != null) _baseObj.GetOrAddComponent<VRCSDK2.VRC_Station>().UseStation(Utils.LocalPlayerApi);
                         ToggleChair(false);
+                        Physics.gravity = Main.gravity; //Just in case someone switches from another mode to this one and then unsits
                         SitActive = false;
                         Logger.Msg("Unsit - Bone Chair");
                         break;

@@ -75,13 +75,13 @@ namespace SeatMod
             }
 
             // Check for Game Objects first, as it's the lowest cost check.
-            if (GameObject.Find("eVRCRiskFuncEnable") != null || GameObject.Find("UniversalRiskyFuncEnable") != null || GameObject.Find("ModCompatRiskyFuncEnable ") != null)
+            if (GameObject.Find("eVRCRiskFuncEnable") != null || GameObject.Find("UniversalRiskyFuncEnable") != null || GameObject.Find("ModCompatRiskyFuncEnable") != null)
             {
                 Main.WorldType = 0;
                 checkedWorlds.Add(worldId, 0);
                 yield break;
             }
-            else if (GameObject.Find("eVRCRiskFuncDisable") != null || GameObject.Find("UniversalRiskyFuncDisable") != null || GameObject.Find("ModCompatRiskyFuncDisable ") != null)
+            else if (GameObject.Find("eVRCRiskFuncDisable") != null || GameObject.Find("UniversalRiskyFuncDisable") != null || GameObject.Find("ModCompatRiskyFuncDisable") != null)
             {
                 Main.WorldType = 4;
                 checkedWorlds.Add(worldId, 4);
