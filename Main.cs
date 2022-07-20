@@ -9,7 +9,7 @@ using VRC.SDKBase;
 using VRC.Animation;
 using System.IO;
 
-[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.5", "Nirvash")]
+[assembly: MelonInfo(typeof(SeatMod.Main), "SeatMod", "1.0.6", "Nirvash")]
 [assembly: MelonGame("VRChat", "VRChat")]
 [assembly: MelonColor(ConsoleColor.DarkBlue)]
 [assembly: MelonOptionalDependencies("ActionMenuApi","IKTweaks")]
